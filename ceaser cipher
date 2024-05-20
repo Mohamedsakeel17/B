@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <ctype.h>
+int main() {
+char text[100], ch;
+int key, a;
+printf("Press 1 for encryption, 2 for decryption: ");
+scanf("%d", &a);
+printf("Enter the text: ");
+scanf(" %s", text);
+printf("Enter the key: ");
+scanf("%d", &key);
+
+if (a == 1) {
+for (int i = 0; text[i] '; ++i) {
+ch = text[i];
+if (islower(ch))
+ch = (ch - 'a' + key) % 26 + 'a';
+else if (isupper(ch))
+ch = (ch - 'A' + key) % 26 + 'A';
+text[i] = ch;
+}
+printf("Encrypted text: %s\n", text);
+} 
+
+else if (a == 2) {
+for (int i = 0; text[i] ; ++i) {
+ch = text[i];
+if (islower(ch))
+ch = (ch - 'a' - key + 26) % 26 + 'a';
+else if (isupper(ch))
+ch = (ch - 'A' - key + 26) % 26 + 'A';
+text[i] = ch;
+}
+printf("Decrypted text: %s\n", text);
+} else {
+printf("Invalid choice. Please enter 1 for encryption or 2 for decryption.\n");
+}
+Return 0;
