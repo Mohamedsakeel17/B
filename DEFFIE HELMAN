@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+int main() {
+unsigned long long p,g,privateA,privateB,publicA,publicB,sharedSecretA,sharedSecretB;
+printf("\n\nEnter the value of P: ");
+scanf("%llu",&p);
+printf("\n\nEnter the value of g: ");
+scanf("%llu",&g);
+printf("\n\nEnter the A's Private Key: ");
+scanf("%llu",&privateA);
+printf("\n\nEnter the B's Private key: ");
+scanf("%llu",&privateB);
+publicA = (unsigned long long)pow(g, privateA) % p;
+publicB= (unsigned long long)pow(g, privateB) % p;
+sharedSecretA = (unsigned long long)pow(publicB,privateA) % p;
+sharedSecretB = (unsigned long long)pow(publicA,privateB) % p;
+printf("\n\nThe value of P (prime number): %llu\n", p);
+printf("\n\nP's primitive root: %llu\n", g);
+printf("\n\nA's private key: %llu\n", privateA);
+printf("\n\nB's private key: %llu\n", privateB);
+printf("\n\nA's public key: %llu\n", publicA);
+printf("\n\nB's public key: %llu\n", publicB);
+printf("\n\nShared secret computed by A: %llu\n", sharedSecretA);
+printf("\n\nShared secret computed by B: %llu\n", sharedSecretB);
+return 0;
+}
