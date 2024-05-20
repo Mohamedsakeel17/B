@@ -1,0 +1,51 @@
+#include <stdio.h>
+void permutate(int *input, int *permutation, int size) {
+int temp[size];
+for (int i = 0; i < size; i++)
+temp[i] = input[permutation[i] - 1];
+for (int i = 0; i < size; i++)
+input[i] = temp[i];
+}
+void leftShift(int *input, int size, int shifts) {
+int temp;
+for (int s = 0; s < shifts; s++) {
+temp = input[0];
+for (int i = 0; i < size - 1; i++)
+input[i] = input[i + 1];
+input[size - 1] = temp;
+}
+}
+int main() {
+int key[10], p10[10] = {3, 5, 2, 7, 4, 10, 1, 9, 8, 6}, p8[8] = {6, 3, 7, 4, 8, 5, 10, 9}, i;
+printf("Enter the 10-bit initial key: ");
+for (i = 0; i < 10; i++)
+scanf("%1d", &key[i]);
+permutate(key, p10, 10);
+int left[5], right[5];
+for (i = 0; i < 5; i++) {
+left[i] = key[i];
+right[i] = key[i + 5];
+}
+leftShift(left, 5, 1);
+leftShift(right, 5, 1);
+int combined[10];
+for (i = 0; i < 5; i++)
+combined[i] = left[i];
+for (i = 5; i < 10; i++)
+combined[i] = right[i - 5];
+permutate(combined, p8, 8);
+printf("\nGenerated Key 1: ");
+for (i = 0; i < 8; i++)
+printf("%d", combined[i]);
+leftShift(left, 5, 2);
+leftShift(right, 5, 2);
+for (i = 0; i < 5; i++)
+combined[i] = left[i];
+for (i = 5; i < 10; i++)
+combined[i] = right[i - 5];
+permutate(combined, p8, 8);
+printf("\nGenerated Key 2: ");
+for (i = 0; i < 8; i++)
+printf("%d", combined[i]);
+printf("\n");
+return 0;
