@@ -26,7 +26,7 @@ void generateKeys(int p, int q, int *n, int *e, int *d) {
     *n = p * q;
     int phi = (p - 1) * (q - 1);
 
-    *e = 2; // Starting with e = 2
+    *e = 7; // Starting with e = 2
     while (gcd(*e, phi) != 1) {
         (*e)++;
     }
@@ -39,13 +39,13 @@ int decrypt(int ciphertext, int d, int n) {
     return fmod(pow(ciphertext, d), n);
 }
 int main() {
-    int p = 17;
-    int q = 19;
+    int p = 11;
+    int q = 6;
     int n, e, d;
     generateKeys(p, q, &n, &e, &d);
     printf("Public Key (n, e): (%d, %d)\n", n, e);
     printf("Private Key (n, d): (%d, %d)\n", n, d);
-    int plaintext = 88;
+    int plaintext = 4;
     int ciphertext = encrypt(plaintext, e, n);
     printf("Ciphertext: %d\n", ciphertext);
 
